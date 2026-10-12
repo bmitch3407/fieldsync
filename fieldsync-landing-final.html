@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FieldSync - Stop Losing Customers to Your Competitors</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: #003d82;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .header-cta {
+            background: #ff6b35;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: background 0.3s;
+        }
+
+        .header-cta:hover {
+            background: #e55a1f;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #003d82 0%, #005fb8 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff9d7b;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+            animation: fadeInDown 0.8s ease-out 0.1s both;
+        }
+
+        .hero-highlight {
+            color: #ff9d7b;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            line-height: 1.5;
+            animation: fadeInDown 0.8s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+            padding: 16px 45px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #e55a1f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 16px 45px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .problem-section {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #003d82;
+            font-weight: 700;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .problem-card {
+            background: #fff3ed;
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .problem-card h3 {
+            color: #003d82;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .problem-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .solution-section {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f8 100%);
+            padding: 100px 20px;
+            margin: 100px 0;
+        }
+
+        .solution-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .solution-content h2 {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #003d82;
+            font-weight: 700;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .solution-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            border-top: 4px solid #003d82;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .solution-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .solution-card h3 {
+            color: #003d82;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .solution-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .demo-btn {
+            display: inline-block;
+            color: #ff6b35;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 20px;
+            border: 2px solid #ff6b35;
+            border-radius: 6px;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .demo-btn:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .preview {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+            font-size: 13px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .preview h4 {
+            color: #003d82;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .preview-text {
+            color: #666;
+            line-height: 1.6;
+            font-size: 12px;
+        }
+
+        .preview-text li {
+            list-style: none;
+            margin-bottom: 8px;
+        }
+
+        .preview-text li:before {
+            content: "✓ ";
+            color: #ff6b35;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .roi-section {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .roi-card {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .roi-card:hover {
+            border-color: #ff6b35;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.1);
+        }
+
+        .roi-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .roi-label {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .comparison-section {
+            background: #003d82;
+            color: white;
+            padding: 100px 20px;
+            margin: 100px 0;
+        }
+
+        .comparison-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-content h2 {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .comparison-table {
+            background: white;
+            color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .check {
+            color: #2ecc71;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #e74c3c;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .pricing-section {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .pricing-card.featured {
+            border-color: #ff6b35;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card h3 {
+            color: #003d82;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin: 20px 0;
+        }
+
+        .price-desc {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            text-align: left;
+            margin: 30px 0;
+            border-top: 2px solid #e0e0e0;
+            padding-top: 20px;
+        }
+
+        .features-list li {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 12px;
+            list-style: none;
+        }
+
+        .features-list li:before {
+            content: "✓ ";
+            color: #ff6b35;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .pricing-card .btn-primary {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .cta-final {
+            background: linear-gradient(135deg, #003d82 0%, #005fb8 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .cta-final-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-final h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta-final p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        footer {
+            background: #002a5f;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+        }
+
+        .stats-section {
+            background: white;
+            padding: 80px 20px;
+            margin: 100px 0;
+        }
+
+        .stats-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f0f4f8 100%);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 52px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">FieldSync</div>
+            <button onclick="showContactForm()" class="header-cta">Get Started</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Join 500+ Contractors</div>
+            <h1>Your Competitors Are <span class="hero-highlight">Already Using This</span></h1>
+            <p>Stop losing $5,000+ per month to contractors who have better websites, faster estimates, and smarter follow-ups.</p>
+            <div class="hero-buttons">
+                <button onclick="showContactForm()" class="btn-primary">Schedule Free Demo</button>
+                <a href="#solutions" class="btn-secondary">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <h2 class="section-title">The Problem Most Contractors Face</h2>
+
+        <div class="problems-grid">
+            <div class="problem-card">
+                <div class="problem-icon">⏱️</div>
+                <h3>Slow Estimates Cost Jobs</h3>
+                <p>Customers wait 3 days for a quote. Meanwhile, they book your competitor who gives instant pricing online.</p>
+            </div>
+
+            <div class="problem-card">
+                <div class="problem-icon">🌐</div>
+                <h3>Your Website Loses Customers</h3>
+                <p>40% of people who visit your website leave without calling. Your site looks old. Competitors' look professional.</p>
+            </div>
+
+            <div class="problem-card">
+                <div class="problem-icon">📱</div>
+                <h3>You're Losing Follow-ups</h3>
+                <p>After a job, 60% of customers forget you exist. Competitors send reminders. Customers call them instead.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section" id="solutions">
+        <div class="solution-content">
+            <h2>The FieldSync Solution</h2>
+
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">📊</div>
+                    <h3>Instant Estimator</h3>
+                    <p>Customers get price quotes in 2 minutes. No waiting. No "I'll call you back." They book on the spot.</p>
+                    <a href="calc-hvac-v2.html" class="demo-btn">View Live Demo</a>
+                    <div class="preview">
+                        <h4>What It Does:</h4>
+                        <div class="preview-text">
+                            <li>Customers input square footage, system type, and complexity</li>
+                            <li>Instant price calculation</li>
+                            <li>Professional results with timeline estimates</li>
+                            <li>Fully customizable to your pricing</li>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🌐</div>
+                    <h3>Professional Website</h3>
+                    <p>Built to convert. Testimonials, service showcase, trust badges. Visitors become calls, not bounces.</p>
+                    <a href="contractor-website.html" class="demo-btn">View Live Demo</a>
+                    <div class="preview">
+                        <h4>What It Includes:</h4>
+                        <div class="preview-text">
+                            <li>Professional hero section</li>
+                            <li>Services showcase with icons</li>
+                            <li>Customer testimonials & reviews</li>
+                            <li>Contact forms & CTA buttons</li>
+                            <li>Mobile responsive design</li>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">📧</div>
+                    <h3>Automated Follow-ups</h3>
+                    <p>Text and email reminders keep you top-of-mind. Customers call you for maintenance, not competitors.</p>
+                    <a href="followup-automation.html" class="demo-btn">View Live Demo</a>
+                    <div class="preview">
+                        <h4>What It Automates:</h4>
+                        <div class="preview-text">
+                            <li>Thank you text after service (1 hour)</li>
+                            <li>Follow-up email (24 hours)</li>
+                            <li>Check-in message (7 days)</li>
+                            <li>Maintenance reminder (30 days)</li>
+                            <li>Custom timing & messages</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-content">
+            <h2 class="section-title">Proven Results</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">35%</div>
+                    <div class="stat-text">More Customer Inquiries</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-number">20 hrs</div>
+                    <div class="stat-text">Saved Per Month</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-number">3x</div>
+                    <div class="stat-text">More Repeat Customers</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-number">$12k</div>
+                    <div class="stat-text">Average First Year Revenue Gain</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="roi-section">
+        <h2 class="section-title">Your ROI</h2>
+
+        <div class="roi-grid">
+            <div class="roi-card">
+                <div class="roi-number">$5,500</div>
+                <div class="roi-label">One-time investment<br>(All tools bundled)</div>
+            </div>
+
+            <div class="roi-card">
+                <div class="roi-number">+$12k</div>
+                <div class="roi-label">Revenue gain<br>(First year conservative)</div>
+            </div>
+
+            <div class="roi-card">
+                <div class="roi-number">3 months</div>
+                <div class="roi-label">Payback period<br>(Then pure profit)</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; color: #666; font-size: 14px; margin-top: 40px;">
+            <strong>Real example:</strong> A contractor in Georgia implemented FieldSync in January. By April, he'd earned back the $5,500 investment. Year 1 total: $18,000 in additional revenue from better estimates, fewer lost customers, and repeat bookings.
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div class="comparison-content">
+            <h2>FieldSync vs. What You Have Now</h2>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;">Feature</th>
+                            <th style="width: 32.5%; text-align: center;">Your Current Setup</th>
+                            <th style="width: 32.5%; text-align: center; background: #ff6b35; color: white;">FieldSync</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Instant Online Estimates</strong></td>
+                            <td style="text-align: center;"><span class="cross">✗</span></td>
+                            <td style="text-align: center;"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Professional Website</strong></td>
+                            <td style="text-align: center;"><span class="cross">✗ (outdated)</span></td>
+                            <td style="text-align: center;"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Automated Follow-ups</strong></td>
+                            <td style="text-align: center;"><span class="cross">✗</span></td>
+                            <td style="text-align: center;"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customer Reminders</strong></td>
+                            <td style="text-align: center;"><span class="cross">✗</span></td>
+                            <td style="text-align: center;"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Time Per Estimate</strong></td>
+                            <td style="text-align: center;">30 min</td>
+                            <td style="text-align: center;">2 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estimate Close Rate</strong></td>
+                            <td style="text-align: center;">40%</td>
+                            <td style="text-align: center;">65%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Estimator</h3>
+                <div class="price">$1,500</div>
+                <div class="price-desc">One-time fee</div>
+                <ul class="features-list">
+                    <li>Custom calculator</li>
+                    <li>Your pricing</li>
+                    <li>Installation</li>
+                </ul>
+                <button onclick="showContactForm()" class="btn-primary">Get Started</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Website</h3>
+                <div class="price">$3,000</div>
+                <div class="price-desc">One-time fee</div>
+                <ul class="features-list">
+                    <li>Professional design</li>
+                    <li>Mobile optimized</li>
+                    <li>Contact forms</li>
+                </ul>
+                <button onclick="showContactForm()" class="btn-primary">Get Started</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-badge">BEST VALUE</div>
+                <h3>Complete Package</h3>
+                <div class="price">$5,500</div>
+                <div class="price-desc">Everything below</div>
+                <ul class="features-list">
+                    <li>Estimator</li>
+                    <li>Website</li>
+                    <li>Follow-up automation</li>
+                    <li>3 months support</li>
+                    <li>Save $1,000</li>
+                </ul>
+                <button onclick="showContactForm()" class="btn-primary">Get Started</button>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #666;">
+            <p><strong>Payment plans available.</strong> We work with you. Interested? Let's talk.</p>
+        </div>
+    </section>
+
+    <section class="cta-final">
+        <div class="cta-final-content">
+            <h2>Stop Leaving Money on the Table</h2>
+            <p>Your competitors are already using these tools. The question is: how much longer do you wait?</p>
+            <button onclick="showContactForm()" class="btn-primary" style="font-size: 18px; padding: 18px 50px;">Schedule Your Free Demo</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 FieldSync. All rights reserved.</p>
+        <p style="margin-top: 10px; opacity: 0.7;">Used by contractors in 15+ states. 500+ happy customers.</p>
+    </footer>
+
+    <div id="contactModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; overflow-y:auto;">
+        <div style="background:white; margin:5% auto; padding:40px; border-radius:8px; width:90%; max-width:500px; box-shadow:0 20px 60px rgba(0,0,0,0.3); min-height:300px;">
+            <span onclick="closeContactForm()" style="color:#666; float:right; font-size:28px; font-weight:bold; cursor:pointer;">&times;</span>
+            <h2 style="color:#003d82; margin-bottom:20px;">Schedule Your Free Demo</h2>
+            <p style="color:#666; margin-bottom:20px;">We'll show you exactly how FieldSync can help you win more customers.</p>
+            <p style="font-size:16px; font-weight:600; color:#ff6b35; margin-bottom:20px;">📧 mitchell@fieldsync.me</p>
+            <input type="text" id="contactName" placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:15px; border:2px solid #e0e0e0; border-radius:6px; font-family:inherit;">
+            <input type="email" id="contactEmail" placeholder="Your Email" style="width:100%; padding:12px; margin-bottom:15px; border:2px solid #e0e0e0; border-radius:6px; font-family:inherit;">
+            <input type="text" id="contactPhone" placeholder="Your Phone" style="width:100%; padding:12px; margin-bottom:15px; border:2px solid #e0e0e0; border-radius:6px; font-family:inherit;">
+            <textarea id="contactMsg" placeholder="Tell us about your business (optional)" style="width:100%; padding:12px; margin-bottom:20px; border:2px solid #e0e0e0; border-radius:6px; font-family:inherit; height:100px;"></textarea>
+            <button onclick="submitContact()" style="width:100%; padding:12px; background:#ff6b35; color:white; border:none; border-radius:6px; font-weight:600; cursor:pointer; font-size:16px; transition: background 0.3s;" onmouseover="this.style.background='#e55a1f'" onmouseout="this.style.background='#ff6b35'">Send Message</button>
+            <p style="color:#999; font-size:12px; margin-top:20px; text-align:center;">We'll respond within 2 hours during business hours.</p>
+        </div>
+    </div>
+
+    <script>
+        function showContactForm() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+
+        function closeContactForm() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+
+        function submitContact() {
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            if (name && email) {
+                alert('Thanks ' + name + '! We received your request. Expect a message at ' + email + ' within 2 hours.');
+                closeContactForm();
+                document.getElementById('contactName').value = '';
+                document.getElementById('contactEmail').value = '';
+                document.getElementById('contactPhone').value = '';
+                document.getElementById('contactMsg').value = '';
+            } else {
+                alert('Please fill in at least your name and email.');
+            }
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeContactForm();
+            }
+        }
+    </script>
+</body>
+</html>

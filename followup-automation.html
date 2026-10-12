@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Follow-Up System - ServiceFlow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .demo-section h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 28px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 60px;
+            width: 2px;
+            height: 60px;
+            background: #ddd;
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 25px;
+            flex-shrink: 0;
+            z-index: 10;
+            position: relative;
+        }
+
+        .timeline-content {
+            flex-grow: 1;
+        }
+
+        .timeline-time {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .message-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .message-box.email {
+            border-left-color: #ff6b35;
+        }
+
+        .message-box.sms {
+            border-left-color: #2ecc71;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .badge.email {
+            background: #ffe0cc;
+            color: #ff6b35;
+        }
+
+        .badge.sms {
+            background: #d4edda;
+            color: #2ecc71;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 8px;
+            border-top: 4px solid #667eea;
+        }
+
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 30px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .roi-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .roi-box h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .roi-stat {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .roi-text {
+            font-size: 14px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Automated Follow-Up System</h1>
+            <p>Never miss a customer follow-up again. Email & SMS automation that increases bookings.</p>
+        </div>
+
+        <div class="demo-section">
+            <h2>How It Works</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">Immediately After Service</div>
+                        <div class="timeline-title">Service Completion</div>
+                        <div class="timeline-description">Customer finishes service. System automatically logs the interaction.</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">1 Hour Later</div>
+                        <div class="timeline-title">Thank You SMS <span class="badge sms">TEXT</span></div>
+                        <div class="timeline-description">Customer gets a thank you text with a 1-click review link.</div>
+                        <div class="message-box sms">
+                            "Hi! Thanks for choosing us today. We'd love your feedback: [review link]. Reply STOP to opt out."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">24 Hours Later</div>
+                        <div class="timeline-title">Follow-Up Email <span class="badge email">EMAIL</span></div>
+                        <div class="timeline-description">Email with service summary, next steps, and maintenance tips.</div>
+                        <div class="message-box email">
+                            Subject: Here's your HVAC service summary
+                            <br><br>
+                            Hi [Customer Name],
+                            <br><br>
+                            Thanks again for your service today! We installed your new AC unit.
+                            <br><br>
+                            Next maintenance: [DATE]
+                            <br>
+                            Warranty: 1 year
+                            <br>
+                            Questions? Call us anytime.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">7 Days Later</div>
+                        <div class="timeline-title">Check-In Email <span class="badge email">EMAIL</span></div>
+                        <div class="timeline-description">Simple check-in: is everything working perfectly?</div>
+                        <div class="message-box email">
+                            Subject: How's your new system working?
+                            <br><br>
+                            Hi [Customer Name],
+                            <br><br>
+                            Just checking in - is your AC system working great?
+                            <br><br>
+                            Reply or call if you have any questions.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">5</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">30 Days Later</div>
+                        <div class="timeline-title">Maintenance Reminder <span class="badge sms">TEXT</span></div>
+                        <div class="timeline-description">Remind them about scheduled maintenance and offer to book.</div>
+                        <div class="message-box sms">
+                            "Your next maintenance is coming up! Schedule now to keep warranty active: [booking link]"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Key Features</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>✓ Customizable Templates</h3>
+                    <p>Edit every message to match your brand voice. Use customer names and service details automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✓ Smart Scheduling</h3>
+                    <p>Set exactly when each follow-up goes out. Avoid texting at 3 AM.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✓ Review Requests</h3>
+                    <p>Automatically ask for Google/Yelp reviews with one-click links.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✓ Appointment Booking</h3>
+                    <p>Customers can book next service directly from email/text.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✓ Multi-Channel</h3>
+                    <p>Send via SMS and email. Reach customers where they're most responsive.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✓ Track Engagement</h3>
+                    <p>See who opened emails, clicked links, and booked appointments.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>The Business Impact</h2>
+
+            <div class="roi-box">
+                <h3>What Contractors See</h3>
+                <div class="roi-stat">35% More Bookings</div>
+                <div class="roi-text">
+                    From follow-ups that turn one-time customers into repeat clients
+                </div>
+
+                <div class="roi-stat">2 Hours/Week Saved</div>
+                <div class="roi-text">
+                    Automated follow-ups that would normally take manual work
+                </div>
+
+                <div class="roi-stat">5-Star Reviews</div>
+                <div class="roi-text">
+                    Customers appreciate the professional, attentive service
+                </div>
+            </div>
+
+            <button class="cta-button">See It In Action</button>
+        </div>
+    </div>
+</body>
+</html>

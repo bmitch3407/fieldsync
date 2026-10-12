@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProTech HVAC - Expert Heating & Cooling Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: #003d82;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #003d82 0%, #005fb8 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cta-button:hover {
+            background: #e55a1f;
+            transform: translateY(-2px);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #003d82;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid #ff6b35;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card h3 {
+            color: #003d82;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .testimonials {
+            background: #f0f4f8;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .stars {
+            color: #ff6b35;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #003d82;
+            font-size: 14px;
+        }
+
+        .contact-section {
+            background: #003d82;
+            color: white;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            color: white;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .contact-item p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        footer {
+            background: #002a5f;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 12px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #666;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal h2 {
+            color: #003d82;
+            margin-bottom: 15px;
+        }
+
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .modal button {
+            width: 100%;
+            padding: 12px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .modal button:hover {
+            background: #e55a1f;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">ProTech HVAC</div>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#testimonials">Reviews</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">✓ Licensed & Insured</div>
+            <h1>Expert HVAC Service for Your Home</h1>
+            <p>Fast, reliable heating and cooling solutions. Emergency service available 24/7.</p>
+            <button class="cta-button">Get Free Estimate</button>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>🔧 AC Installation</h3>
+                <p>Professional installation of new air conditioning systems with full warranty coverage.</p>
+            </div>
+            <div class="service-card">
+                <h3>🌡️ Heating Systems</h3>
+                <p>Furnace installation, repair, and maintenance. We handle all brands and models.</p>
+            </div>
+            <div class="service-card">
+                <h3>🛠️ Maintenance Plans</h3>
+                <p>Regular maintenance to keep your system running efficiently all year long.</p>
+            </div>
+            <div class="service-card">
+                <h3>🚨 Emergency Repair</h3>
+                <p>24/7 emergency service. We're here when you need us most.</p>
+            </div>
+            <div class="service-card">
+                <h3>💨 Ductwork</h3>
+                <p>Duct cleaning, sealing, and installation for improved efficiency.</p>
+            </div>
+            <div class="service-card">
+                <h3>📊 Air Quality</h3>
+                <p>Air filtration and purification systems for healthier indoor air.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p>"ProTech HVAC installed our new AC system last summer. Professional, on-time, and the system works perfectly. Highly recommend!"</p>
+                <div class="testimonial-author">- Sarah M., Homeowner</div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p>"Emergency furnace repair on a Saturday night. They showed up in under an hour and had us warm again within 2 hours. Lifesavers!"</p>
+                <div class="testimonial-author">- John D., Homeowner</div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p>"Been using their maintenance plan for 3 years. My energy bills have gone down and I never worry about breakdowns."</p>
+                <div class="testimonial-author">- Jennifer L., Homeowner</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>📞 Call Us</h3>
+                <p>(555) 123-4567</p>
+                <p>24/7 Emergency Line</p>
+            </div>
+            <div class="contact-item">
+                <h3>📧 Email</h3>
+                <p>info@protechhvac.com</p>
+                <p>Response within 2 hours</p>
+            </div>
+            <div class="contact-item">
+                <h3>📍 Service Area</h3>
+                <p>Metro Area & Surrounding Counties</p>
+                <p>Same-day service available</p>
+            </div>
+        </div>
+        <button class="cta-button">Schedule Free Inspection</button>
+    </section>
+
+    <footer>
+        <p>© 2026 ProTech HVAC. All rights reserved. | Licensed & Insured | 24/7 Service</p>
+        <p style="margin-top: 10px; opacity: 0.7;">Built with ServiceFlow</p>
+    </footer>
+
+    <div id="estimateModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Free Estimate Request</h2>
+            <input type="text" placeholder="Your Name" id="name">
+            <input type="email" placeholder="Your Email" id="email">
+            <input type="tel" placeholder="Your Phone" id="phone">
+            <textarea placeholder="Tell us about your project..." rows="4" id="message"></textarea>
+            <button onclick="submitEstimate()">Request Estimate</button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('estimateModal');
+
+        function openModal() {
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function submitEstimate() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            if (name && email && phone) {
+                alert('Thanks ' + name + '! We\'ll contact you at ' + phone + ' within 2 hours.');
+                closeModal();
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Replace all CTA button clicks with modal
+        document.querySelectorAll('.cta-button').forEach(btn => {
+            btn.onclick = function(e) {
+                e.preventDefault();
+                openModal();
+            };
+        });
+    </script>
+</body>
+</html>
