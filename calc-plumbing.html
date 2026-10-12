@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plumbing Estimate Calculator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-width: 500px; width: 100%; padding: 40px; }
+        h1 { color: #333; font-size: 28px; margin-bottom: 8px; text-align: center; }
+        .subtitle { color: #666; text-align: center; margin-bottom: 30px; font-size: 14px; }
+        .form-group { margin-bottom: 25px; }
+        label { display: block; color: #333; font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 14px; }
+        input:focus, select:focus { outline: none; border-color: #1e90ff; }
+        .value-display { color: #1e90ff; font-weight: 600; margin-top: 8px; text-align: center; }
+        button { width: 100%; padding: 14px; background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%); color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; }
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
+        .result { margin-top: 30px; padding: 20px; background: #f0f8ff; border-radius: 8px; border-left: 4px solid #1e90ff; display: none; }
+        .result.show { display: block; }
+        .result-price { font-size: 36px; font-weight: 700; color: #1e90ff; margin: 10px 0; }
+        .result-detail { color: #666; font-size: 13px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Plumbing Estimate</h1>
+        <p class="subtitle">Get an instant price quote</p>
+
+        <div class="form-group">
+            <label>Job Type</label>
+            <select id="jobtype">
+                <option value="repair">Simple Repair</option>
+                <option value="replacement">Fixture Replacement</option>
+                <option value="installation">New Installation</option>
+                <option value="repiping">Full Repiping</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Number of Fixtures</label>
+            <input type="number" id="fixtures" value="3" min="1" max="20">
+        </div>
+
+        <div class="form-group">
+            <label>Complexity</label>
+            <input type="range" id="complexity" min="1" max="5" value="2">
+            <div class="value-display" id="complexityLabel">Standard</div>
+        </div>
+
+        <div class="form-group">
+            <label>Materials & Services</label>
+            <select id="accessory">
+                <option value="none">Standard Materials</option>
+                <option value="upgrade">Premium Fixtures (+$800)</option>
+                <option value="water-heater">Water Heater Service (+$1,200)</option>
+                <option value="drain-clean">Drain Cleaning (+$400)</option>
+                <option value="sump">Sump Pump Install (+$1,500)</option>
+                <option value="water-softener">Water Softener (+$2,000)</option>
+                <option value="all">Premium Package (+$4,000)</option>
+            </select>
+        </div>
+
+        <button onclick="calculate()">Calculate Estimate</button>
+
+        <div class="result" id="result">
+            <strong>Your Estimated Cost</strong>
+            <div class="result-price" id="price">$0</div>
+            <div class="result-detail">
+                Includes labor, materials, and 1-year warranty<br>
+                Timeline: <span id="timeline">1-3 days</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('complexity').addEventListener('input', function() {
+            const labels = {1: 'Simple', 2: 'Standard', 3: 'Complex', 4: 'Very Complex', 5: 'Highly Complex'};
+            document.getElementById('complexityLabel').textContent = labels[this.value];
+        });
+
+        function calculate() {
+            const jobtype = document.getElementById('jobtype').value;
+            const fixtures = parseInt(document.getElementById('fixtures').value) || 3;
+            const complexity = parseInt(document.getElementById('complexity').value);
+            const accessory = document.getElementById('accessory').value;
+
+            let price = 250;
+
+            const jobtypeMult = {repair: 1, replacement: 1.5, installation: 2, repiping: 3};
+            price *= jobtypeMult[jobtype] || 1;
+
+            price += fixtures * 150;
+            price *= [0, 0.8, 1, 1.2, 1.4, 1.6][complexity];
+
+            const addons = {none: 0, upgrade: 800, 'water-heater': 1200, 'drain-clean': 400, sump: 1500, 'water-softener': 2000, all: 4000};
+            price += addons[accessory] || 0;
+
+            const final = Math.round(price / 100) * 100;
+
+            let timeline = '1-3 days';
+            if (complexity >= 4) timeline = '3-5 days';
+            if (jobtype === 'repiping') timeline = '1-2 weeks';
+
+            document.getElementById('price').textContent = '$' + final.toLocaleString();
+            document.getElementById('timeline').textContent = timeline;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>

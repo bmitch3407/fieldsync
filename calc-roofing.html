@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roofing Estimate Calculator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #d32f2f 0%, #ff5252 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-width: 500px; width: 100%; padding: 40px; }
+        h1 { color: #333; font-size: 28px; margin-bottom: 8px; text-align: center; }
+        .subtitle { color: #666; text-align: center; margin-bottom: 30px; font-size: 14px; }
+        .form-group { margin-bottom: 25px; }
+        label { display: block; color: #333; font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 14px; }
+        input:focus, select:focus { outline: none; border-color: #d32f2f; }
+        .value-display { color: #d32f2f; font-weight: 600; margin-top: 8px; text-align: center; }
+        button { width: 100%; padding: 14px; background: linear-gradient(135deg, #d32f2f 0%, #ff5252 100%); color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; }
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
+        .result { margin-top: 30px; padding: 20px; background: #ffebee; border-radius: 8px; border-left: 4px solid #d32f2f; display: none; }
+        .result.show { display: block; }
+        .result-price { font-size: 36px; font-weight: 700; color: #d32f2f; margin: 10px 0; }
+        .result-detail { color: #666; font-size: 13px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Roofing Estimate</h1>
+        <p class="subtitle">Get an instant price quote</p>
+
+        <div class="form-group">
+            <label>Roof Size (Square Feet)</label>
+            <input type="number" id="sqft" value="2000" min="500" max="10000">
+        </div>
+
+        <div class="form-group">
+            <label>Material Type</label>
+            <select id="material">
+                <option value="asphalt">Asphalt Shingles</option>
+                <option value="metal">Metal Roofing</option>
+                <option value="tile">Clay/Ceramic Tile</option>
+                <option value="slate">Slate Roofing</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Roof Pitch/Complexity</label>
+            <input type="range" id="complexity" min="1" max="5" value="2">
+            <div class="value-display" id="complexityLabel">Standard Pitch</div>
+        </div>
+
+        <div class="form-group">
+            <label>Additional Work</label>
+            <select id="accessory">
+                <option value="none">Roof Only</option>
+                <option value="flashing">Flashing Repair (+$400)</option>
+                <option value="gutters">Gutter Install (+$800)</option>
+                <option value="skylights">Skylights (+$1,500)</option>
+                <option value="ventilation">Ventilation Upgrade (+$600)</option>
+                <option value="insulation">Insulation Upgrade (+$1,200)</option>
+                <option value="all">Complete Package (+$3,000)</option>
+            </select>
+        </div>
+
+        <button onclick="calculate()">Calculate Estimate</button>
+
+        <div class="result" id="result">
+            <strong>Your Estimated Cost</strong>
+            <div class="result-price" id="price">$0</div>
+            <div class="result-detail">
+                Includes materials, labor, permits, and 10-year warranty<br>
+                Timeline: <span id="timeline">1-2 weeks</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('complexity').addEventListener('input', function() {
+            const labels = {1: 'Low Pitch', 2: 'Standard Pitch', 3: 'Steep Pitch', 4: 'Very Steep', 5: 'Complex Multi-Level'};
+            document.getElementById('complexityLabel').textContent = labels[this.value];
+        });
+
+        function calculate() {
+            const sqft = parseInt(document.getElementById('sqft').value) || 2000;
+            const material = document.getElementById('material').value;
+            const complexity = parseInt(document.getElementById('complexity').value);
+            const accessory = document.getElementById('accessory').value;
+
+            let price = sqft * 5;
+
+            const materialMult = {asphalt: 1, metal: 1.4, tile: 2, slate: 2.5};
+            price *= materialMult[material] || 1;
+
+            price *= [0, 0.8, 1, 1.2, 1.4, 1.6][complexity];
+
+            const addons = {none: 0, flashing: 400, gutters: 800, skylights: 1500, ventilation: 600, insulation: 1200, all: 3000};
+            price += addons[accessory] || 0;
+
+            const final = Math.round(price / 100) * 100;
+
+            let timeline = '1-2 weeks';
+            if (complexity >= 4) timeline = '2-3 weeks';
+            if (sqft > 5000) timeline = '2-4 weeks';
+
+            document.getElementById('price').textContent = '$' + final.toLocaleString();
+            document.getElementById('timeline').textContent = timeline;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>
